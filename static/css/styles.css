@@ -10,12 +10,12 @@ body {
 
 /* navigation */
 .navigation-nav {
-  background-color: #b71c1c !important;
+  background-color: #f5f5f5 !important;
 }
 
 .navbar-nav > .nav-item, i {
   font-weight: 900 !important;
-  color: #f5f5f5 !important;
+  color: #b71c1c !important;
 }
 
 .navbar-nav > i {
@@ -26,7 +26,7 @@ body {
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: 900 !important;
-  color: #f5f5f5 !important;
+  color: #b71c1c !important;
 }
 
 .navbar-nav > .nav-item:hover {
@@ -40,6 +40,19 @@ body {
 
 .navbar-brand:hover {
   border-bottom: 2px solid #43a047 !important;
+}
+
+.navbar-nav > .cart-item {
+  background-color: #43a047 !important;
+  color: #f5f5f5 !important;
+}
+
+.cart-item > i {
+  color: #f5f5f5 !important;
+}
+
+.cart-item:active > i {
+  color: #212121 !important;
 }
 
 /* botones */
@@ -69,6 +82,30 @@ body {
 
 .items-card > ul > li > i {
   color: #b71c1c !important;
+}
+
+/*card*/
+.card {
+  border-radius: 0 !important;
+}
+
+/*styles*/
+.heading-line {
+  height: 3px;
+  width: 10%;
+  background-color: #7f0000 !important;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 900 !important;
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 700 !important;
 }
 
 /*# sourceMappingURL=styles.css.map */

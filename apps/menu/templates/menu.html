@@ -1,12 +1,19 @@
 {% extends './base.html' %}
-
-{% block content %}
-<section class="menu-list mt-5 py-5">
+{% load staticfiles %}
+{% block content %}s
+<section class="menu-list mt-3 py-3" >
 	<div class="text-center py-3">
+		<h1 class="py-3 heading-section"> Menu </h1>
+		<div class="mx-auto heading-line"></div>
+	</div>
+</section>
+<section class="pizza-list mt-3 py-3">
+	<div class="text-center pb-3">
 		<h3 class="py-3 heading-section"> Pizza </h3>
 		<div class="mx-auto heading-line"></div>
 	</div>
 	<div class="container">
+		
 		<div class="row">
 			{% if pizza %}
 			{% for item in pizza %}
@@ -23,8 +30,94 @@
 								{{ item.category.name }}
 							</small>
 							<ul class="list-unstyled">
+								{% if item.small_price %}
 								<li><i class="fas fa-pizza-slice"></i> $ {{ item.small_price }}</li>
+								{% endif %}
+								{% if item.large_price %}
 								<li><i class="fas fa-pizza-slice"></i> $ {{ item.large_price }}</li>
+								{% endif %}
+							</ul>
+							<a href="#" class="btn btn-secondary btn-lg">Add to cart</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+</section>
+<!--Subs-->
+<section class="subs-list mt-3 py-3">
+	<div class="text-center pb-3">
+		<h3 class="py-3 heading-section"> Subs </h3>
+		<div class="mx-auto heading-line"></div>
+	</div>
+	<div class="container">
+		
+		<div class="row">
+			{% if subs %}
+			{% for item in subs %}
+			<div class="col-lg-6 card mb-3 mx-1 shadow-lg" style="max-width: 540px;">
+				<div class="row no-gutters">
+					<div class="col-md-4">
+						<img src="{{ item.image_url }}" class="card-img ">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body items-card">
+							<h5 class="card-title text-center">{{ item.name }}</h5>
+							<small class="text-muted">
+								<i class="fas fa-tags"></i>
+								{{ item.category.name }}
+							</small>
+							<ul class="list-unstyled">
+								{% if item.small_price %}
+								<li><i class="fas fa-pizza-slice"></i> $ {{ item.small_price }}</li>
+								{% endif %}
+								{% if item.large_price %}
+								<li><i class="fas fa-pizza-slice"></i> $ {{ item.large_price }}</li>
+								{% endif %}
+							</ul>
+							<a href="#" class="btn btn-secondary btn-lg">Add to cart</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+</section>
+<!--Salads-->
+<section class="salads-list mt-3 py-3">
+	<div class="text-center pb-3">
+		<h3 class="py-3 heading-section"> Salads </h3>
+		<div class="mx-auto heading-line"></div>
+	</div>
+	<div class="container">
+		
+		<div class="row">
+			{% if salads %}
+			{% for item in salads %}
+			<div class="col-lg-6 card mb-3 mx-1 shadow-lg" style="max-width: 540px;">
+				<div class="row no-gutters">
+					<div class="col-md-4">
+						<img src="{{ item.image_url }}" class="card-img ">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body items-card">
+							<h5 class="card-title text-center">{{ item.name }}</h5>
+							<small class="text-muted">
+								<i class="fas fa-tags"></i>
+								{{ item.category.name }}
+							</small>
+							<ul class="list-unstyled">
+								{% if item.small_price %}
+								<li><i class="fas fa-pizza-slice"></i> $ {{ item.small_price }}</li>
+								{% endif %}
+								{% if item.large_price %}
+								<li><i class="fas fa-pizza-slice"></i> $ {{ item.large_price }}</li>
+								{% endif %}
 							</ul>
 							<a href="#" class="btn btn-secondary btn-lg">Add to cart</a>
 						</div>

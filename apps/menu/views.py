@@ -15,7 +15,7 @@ def menu(request):
 	# Context
 	context = {
 	'pizza': pizza,
-	'salad': salads,
+	'salads': salads,
 	'subs': subs,
 	}
 	# view

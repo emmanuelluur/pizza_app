@@ -19,24 +19,25 @@ body {
 
 /* navigation */
 .navigation-nav {
-	background-color: $primary !important;
+	background-color: $color_white !important;
 }
 .navbar-nav > .nav-item, i {
 	font-weight: 900 !important; 
-	color: $color-white !important;
+	color: $primary !important;
 }
 .navbar-nav > i {
 	font-weight: 900 !important; 
-	color: $color-white !important;
+	color:  $color_white !important;
 }
 .navbar-brand {
 	font-size: 1.5rem;
 	font-weight: 900 !important; 
-	color: $color-white !important;
+	color:  $primary !important;
 }
 .navbar-nav > .nav-item:hover {
 	border-bottom: 2px solid $secondary !important;
 }
+
 .navbar-nav > .nav-item:active {
 	color: $color-black !important;
 	background-color: $s-light !important;
@@ -44,7 +45,16 @@ body {
 .navbar-brand:hover {
 	border-bottom: 2px solid $secondary !important;
 }
-
+.navbar-nav > .cart-item {
+	background-color: $secondary !important;
+	color: $color-white !important;
+}
+.cart-item > i{
+	color: $color-white !important;
+}
+.cart-item:active > i{
+	color: $color-black !important;
+}
 /* botones */
 .btn-primary {
 	border-radius: 0;
@@ -72,5 +82,27 @@ body {
 }
 .items-card > ul > li > i {
   color: $primary !important;
-  
+}
+
+/*card*/
+
+.card {
+	border-radius: 0 !important;
+}
+/*styles*/
+.heading-line {
+  height: 3px;
+  width: 10%;
+  background-color: $p-dark !important;
+}
+h1,
+h2,
+h3 {
+  font-weight: 900 !important;
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 700 !important;
 }
