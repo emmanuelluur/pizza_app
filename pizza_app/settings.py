@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.ordenes',
     'apps.categorias',
     'apps.productos',
     'apps.toppings',
