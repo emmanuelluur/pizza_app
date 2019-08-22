@@ -108,4 +108,36 @@ h6 {
   font-weight: 700 !important;
 }
 
+/************
+Inputs
+************/
+input[Type=text],
+input[Type=password],
+input[Type=datetime],
+input[Type=date],
+input[Type=email],
+textarea {
+  border-radius: 0% !important;
+  border: none !important;
+  border-bottom: 2px solid #b71c1c !important;
+  padding: 20px !important;
+}
+
+select {
+  border-color: #b71c1c !important;
+  border-radius: 0% !important;
+  border: none !important;
+  border-bottom: 2px solid !important;
+}
+
+input[Type=text]:focus,
+input[Type=password]:focus,
+input[Type=datetime]:focus,
+input[Type=date]:focus,
+input[Type=email]:focus,
+select,
+textarea:focus {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px #43a047 !important;
+}
+
 /*# sourceMappingURL=styles.css.map */
