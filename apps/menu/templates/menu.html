@@ -37,7 +37,7 @@
 								<li><i class="fas fa-pizza-slice"></i> $ {{ item.large_price }}</li>
 								{% endif %}
 							</ul>
-							<a href="#" class="btn btn-secondary btn-lg">Add to cart</a>
+							<a href="{% url 'add_item' id_prod=item.id %}" class="btn btn-secondary btn-lg">Add to cart</a>
 						</div>
 					</div>
 				</div>
@@ -78,7 +78,7 @@
 								<li><i class="fas fa-pizza-slice"></i> $ {{ item.large_price }}</li>
 								{% endif %}
 							</ul>
-							<a href="#" class="btn btn-secondary btn-lg">Add to cart</a>
+							<a href="{% url 'add_item' id_prod=item.id %}" class="btn btn-secondary btn-lg">Add to cart</a>
 						</div>
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 								<li><i class="fas fa-pizza-slice"></i> $ {{ item.large_price }}</li>
 								{% endif %}
 							</ul>
-							<a href="#" class="btn btn-secondary btn-lg">Add to cart</a>
+							<a href="{% url 'add_item' id_prod=item.id %}" class="btn btn-secondary btn-lg">Add to cart</a>
 						</div>
 					</div>
 				</div>
