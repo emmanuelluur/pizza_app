@@ -3,7 +3,7 @@
 {% block content %}
 <section class="add-product mt-5 py-3">
     <div class="text-center pb-3">
-        <h3 class="py-3 heading-section">  </h3>
+        <h3 class="py-3 heading-section"> </h3>
         <div class="mx-auto heading-line"></div>
     </div>
     <div class="container">
@@ -13,40 +13,117 @@
                 <div class="card-body">
                     <h4 class="card-title"> {{ product.name }} </h4>
                     <img src="{{ product.image_url }}" alt="item" class="img-fluid">
+                    <div class="card bg-primary text-white text-center pt-3 shadow">
+                        <h4>$ <span id="total_label"></span></h4>
+                    </div>
                 </div>
             </div>
             <div class="card col-lg-4 shadow-lg">
                 <div class="card-body">
                     <h4 class="card-title">Choose a size</h4>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="item_price">
-                            Small $ {{ product.small_price }}
-                        </label>
+                    <div id="size-app">
+
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="item_price"
+                                    value="{{product.small_price}}" id="small">
+                                Small $ {{ product.small_price }}
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" value="{{product.large_price}}"
+                                    name="item_price" id="large">
+                                Large $ {{ product.large_price }}
+                            </label>
+                        </div>
+
                     </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="item_price">
-                            Large $ {{ product.large_price }}
-                        </label>
-                    </div>
+
                     <hr>
                     {% if toppings and product.has_topping == 1 %}
-                    <h4 class="card-title">Choose Toppings</h4>
-                    {% for item in toppings %}
-                    <div class="form-check-inline">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" value="{{ item.price }}">{{item.name}}
-                        </label>
+                    <div class="topping-app">
+                        <h4 class="card-title">Choose Toppings</h4>
+                        {% for item in toppings %}
+
+                        <div class="form-check ">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" data-price="{{item.price}}"
+                                    value="{{ item.price }}" name="topping_price">{{item.name}}
+                                <span class="badge badge-secondary">$ {{ item.price }}</span>
+                            </label>
+                        </div>
+
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                     {% endif %}
 
                 </div>
+                <p class="text-center">
+                    <button type="button" class="btn btn-primary btn-lg" id="btn-add">Add</button>
+                </p>
             </div>
             {% endif %}
         </div>
     </div>
 
 </section>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let add_btn = document.getElementById("btn-add");
+        let total = 0;
+        let topping = document.querySelector(".topping-app");
+        let small = document.getElementById("small");
+        let large = document.getElementById("large");
+        let show_total = document.getElementById("total_label");
+        let is_small, is_large = false
+
+        add_btn.disabled = true;
+        show_total.innerHTML = total;
+
+        small.addEventListener("change", () => {
+            is_small = true
+            if (is_large) {
+                // si selecciono large previamente, resta precio large
+                total -= parseFloat(large.value);
+                is_large = false;
+            }
+            total += parseFloat(small.value);
+            show_total.innerHTML = total.toFixed(2);
+            add_btn.disabled = false;
+        })
+        large.addEventListener("change", () => {
+            is_large = true
+            if (is_small) {
+                // si selecciono small previamente, resta precio small
+                total -= parseFloat(small.value);
+                is_small = false;
+            }
+            total += parseFloat(large.value);
+            show_total.innerHTML = total.toFixed(2);
+            add_btn.disabled = false;
+        })
+
+
+        topping.addEventListener("click", el => {
+            if (el.target.getAttribute("name") == 'topping_price') {
+                if (el.target.checked) {
+                    total += parseFloat(el.target.dataset.price);
+                } else {
+                    total -= parseFloat(el.target.dataset.price)
+                }
+                show_total.innerHTML = total.toFixed(2);
+            }
+        })
+
+        add_btn.addEventListener("click", () => {
+            console.log("press");
+
+        })
+    })
+
+</script>
 {% endblock %}
