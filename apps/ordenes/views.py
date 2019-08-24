@@ -13,7 +13,8 @@ import datetime
 
 def cart_view(request):
     current_user = request.user
-    products = Product_to_order.objects.all().filter(user=current_user.id, is_ordered=False)
+    products = Product_to_order.objects.all().filter(
+        user=current_user.id, is_ordered=False)
     total = 0
     if len(products) > 0:
         for item in products:
@@ -24,6 +25,7 @@ def cart_view(request):
     }
     template = "cart_items.html"
     return render(request, template, context)
+
 
 def add_item_view(request, id_prod):
     """ vista agrega producto a carro """
@@ -47,8 +49,8 @@ def add_item_post(request):
 
         item = Product_to_order.objects.create(user=user,
                                                product=product,
-                                               quantity = request.POST['quantity'],
-                                               price= request.POST['price'],
+                                               quantity=request.POST['quantity'],
+                                               price=request.POST['price'],
                                                toppings=request.POST['toppings'],
                                                total_toppings=request.POST['total_toppings'],
                                                total=request.POST['total'],
@@ -59,6 +61,26 @@ def add_item_post(request):
 
     return HttpResponse("No")
 
+
 def success_add(request):
     template = "success_add.html"
     return render(request, template)
+
+
+def delete_item(request, id_prod):
+    if request.method == "POST":
+        current_user = request.user
+        id_p = request.POST['id']
+        product = Product_to_order.objects.get(
+            id=id_p, user=current_user.id, is_ordered=False)
+        product.delete()
+        return redirect('cart_view')
+    if request.method == "GET":
+        current_user = request.user
+        template = "item_delete.html"
+        product = Product_to_order.objects.get(
+            id=id_prod, user=current_user.id, is_ordered=False)
+        context = {
+            'product': product
+        }
+        return render(request, template, context)

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block navbar %} {% endblock %}
+{% block content %}
+<section class="cart py-5 mt-5">
+    <div class="text-center py-3">
+        <h3 class="py-3 heading-section">Delete</h3>
+        <div class="mx-auto heading-line"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-1">
+                {% if product %}
+                <h5>Delete product: {{ product.product.name }}?</h5>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ product.id }}">
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <a href="{% url 'cart_view' %}" class="btn">Cancel</a>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

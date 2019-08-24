@@ -62,6 +62,26 @@ body {
 	background-color: $primary !important;
 	color: $color-white !important;
 }
+
+.btn-delete {
+	border-radius: 0;
+	border-color: $primary !important;
+	background-color: $primary !important;
+	color: $color-white !important;
+}
+.btn-delete > i {
+	color: $color-white !important;
+}
+
+.btn-delete:hover {
+	background-color: transparent !important;
+	color: $primary !important;
+}
+
+.btn-delete:hover > i{
+	color: $primary !important;
+}
+
 .btn-secondary {
 	border-radius: 0;
 	border-color: $s-dark !important;

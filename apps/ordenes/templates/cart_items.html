@@ -16,6 +16,7 @@
                         <th>Quantity</th>
                         <th>Toppings</th>
                         <th>Sub total</th>
+                        <th>actions</th>
                     </thead>
                     <tbody>
                         {% if products %}
@@ -26,6 +27,8 @@
                             <td>{{ item.quantity }}</td>
                             <td>{{ item.toppings }}</td>
                             <td>$ {{ item.total }}</td>
+                            <td> <a href="{% url 'delete_item' id_prod=item.id %}" class="btn btn-delete"><i
+                                        class="fas fa-trash-alt"></i></a> </td>
                         </tr>
                         {% endfor %}
                         <tr>
@@ -33,11 +36,13 @@
                             <td></td>
                             <td></td>
                             <td class="text-right">Total</td>
-                            <td>$ {{ total }}</td>
+                            <td>$ {{ total|floatformat:2 }}</td>
+                            <td></td>
                         </tr>
                         {% endif %}
                     </tbody>
                 </table>
+                <a href="#" class="btn btn-secondary"> Complete order </a>
             </div>
         </div>
     </div>

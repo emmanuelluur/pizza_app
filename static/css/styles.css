@@ -63,6 +63,26 @@ body {
   color: #f5f5f5 !important;
 }
 
+.btn-delete {
+  border-radius: 0;
+  border-color: #b71c1c !important;
+  background-color: #b71c1c !important;
+  color: #f5f5f5 !important;
+}
+
+.btn-delete > i {
+  color: #f5f5f5 !important;
+}
+
+.btn-delete:hover {
+  background-color: transparent !important;
+  color: #b71c1c !important;
+}
+
+.btn-delete:hover > i {
+  color: #b71c1c !important;
+}
+
 .btn-secondary {
   border-radius: 0;
   border-color: #00701a !important;
