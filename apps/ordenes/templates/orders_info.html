@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="cart py-5 mt-5">
+    <div class="text-center py-3">
+        <h3 class="py-3 heading-section">My orders</h3>
+        <div class="mx-auto heading-line"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-1">
+                <table class="table">
+                    <thead>
+                        <th>Order</th>
+                        <th>Date ordered</th>
+                        <th>Complete</th>
+
+                    </thead>
+                    <tbody>
+                        {% if orders %}
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.date_ordered}}</td>
+                            {% if order.is_complete == False %}
+                            <td class="bg-danger text-white">Pending</td>
+                            {%else%}
+                            <td class="bg-success">Complete</td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+                <!--pages-->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <div class="pagination">
+                            <span class="step-links">
+                                {% if orders.has_previous %}
+                                <a href="?page=1" class="btn btn-secondary">&laquo; first</a>
+                                <a href="?page={{ orders.previous_page_number }}" class="btn btn-secondary">previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ orders.number }} of {{ orders.paginator.num_pages }}.
+                                </span>
+
+                                {% if orders.has_next %}
+                                <a href="?page={{ orders.next_page_number }}" class="btn btn-secondary">next</a>
+                                <a href="?page={{ orders.paginator.num_pages }}" class="btn btn-secondary">last
+                                    &raquo;</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </ul>
+                </nav>
+
+                <!--end-->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

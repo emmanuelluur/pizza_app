@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="order-create mt-5 py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-3">
+                {% if items %}
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="comments">Comments</label>:
+                        <textarea name="comments" class="form-control" id="comments" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        Products:
+                        <p>
+                            <ul class="list-unstyled">
+                                {% for item in items %}
+                                <li>{{ item.product.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </p>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

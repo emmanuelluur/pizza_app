@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from apps.productos.models import Producto
 from apps.toppings.models import Topping
 from django.http import HttpResponse, JsonResponse
-
+from django.core.paginator import Paginator
 from apps.productos.models import Producto
 from django.contrib.auth.models import User
-from .models import Product_to_order
-
+from .models import Product_to_order, Order
+from django.db.models import Sum
 import datetime
 # Create your views here.
 
@@ -84,3 +84,45 @@ def delete_item(request, id_prod):
             'product': product
         }
         return render(request, template, context)
+
+
+def order_create(request):
+    template = "order_create.html"
+    current_user = request.user
+    products = Product_to_order.objects.all().filter(
+        user=current_user.id, is_ordered=False)
+
+    if request.method == 'POST':
+        user = request.user
+        products = Product_to_order.objects.all().filter(
+            user=user.id, is_ordered=False)
+        order = Order.objects.create(user=user,
+                                     is_ordered=True,
+                                     date_ordered=datetime.datetime.now(),
+                                     comments=request.POST['comments'])
+        order.items.set(products)  # SET MULTIPLE
+        products.update(is_ordered=1, date_ordered=datetime.datetime.now())
+        order.save()
+
+        return redirect('cart_view')
+
+    context = {
+        'items': products
+    }
+
+    return render(request, template, context)
+
+
+def order_view(request):
+    
+    current_user = request.user
+    ordenes = Order.objects.all().filter(user=current_user)
+    paginator = Paginator(ordenes, 1)
+    page = request.GET.get('page')
+    orders = paginator.get_page(page)
+    # queryset with Sum
+    template = 'orders_info.html'
+    context = {
+        'orders': orders,
+    }
+    return render(request, template, context)

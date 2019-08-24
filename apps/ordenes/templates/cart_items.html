@@ -42,7 +42,9 @@
                         {% endif %}
                     </tbody>
                 </table>
-                <a href="#" class="btn btn-secondary"> Complete order </a>
+                {% if products %}
+                <a href="{% url 'create_order' %}" class="btn btn-secondary"> Complete order </a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -21,10 +21,11 @@ class Product_to_order(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    items = models.ForeignKey(Product_to_order, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Product_to_order)
     is_ordered = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now=True)
-    date_ordered = models.DateTimeField(auto_now=False)
-
+    date_ordered = models.DateField(auto_now=False)
+    comments = models.TextField(blank=True, null=True)
+    is_complete = models.BooleanField(default=False)
     def __str__(self):
         return self.user.first_name
