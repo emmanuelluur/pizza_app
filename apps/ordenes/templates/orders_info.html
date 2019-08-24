@@ -14,6 +14,7 @@
                         <th>Order</th>
                         <th>Date ordered</th>
                         <th>Complete</th>
+                        <th>Actions</th>
 
                     </thead>
                     <tbody>
@@ -27,7 +28,7 @@
                             {%else%}
                             <td class="bg-success">Complete</td>
                             {% endif %}
-
+                            <td> <a href = "{% url 'payment_view' id_order=order.id %}" class = "btn btn-info">Pay</a> </td>
                         </tr>
                         {% endfor %}
                         {% endif %}

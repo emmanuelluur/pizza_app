@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.pagos',
     'apps.ordenes',
     'apps.categorias',
     'apps.productos',
@@ -125,3 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR), 'static')
+
+# STRIPE KEYS
+STRIPE_SECRET_KEY = '<stripe key>'
+STRIPE_PUBLISHABLE_KEY = '<stripe key>'

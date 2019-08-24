@@ -3,7 +3,6 @@ from apps.productos.models import Producto
 from apps.toppings.models import Topping
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
-from apps.productos.models import Producto
 from django.contrib.auth.models import User
 from .models import Product_to_order, Order
 from django.db.models import Sum

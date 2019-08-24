@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="payment-info mt-5 py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-3">
+                {% if order %}
+                <div class="form-group">
+                    ID: {{ order.id }}
+                </div>
+                <div class="form-group">
+                    Nombre: {{user.first_name}} {{user.last_name}}
+                </div>
+                <div class="form-group">
+                    Total: {{ total.total }}
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="mount" value="{{total.total}}">
+                    <input type="hidden" name="order_id" value="{{ order.id }}">
+                    <input type="hidden" name="nameU" value="{{user.first_name}} {{user.last_name}}">
+                    <div class="form-group">
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ key }}"
+                            data-description="A Pinocchio's Pizza Charge" data-amount="{{ total_s.total_s }}"
+                            data-locale="auto">
+                            </script>
+                    </div>
+                </form>
+
+                {% endif %}
+
+                {% if message %}
+                {{message}}
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+</section>
+{% endblock %}
