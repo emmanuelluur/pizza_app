@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="cart py-5 mt-5">
+    <div class="text-center py-3">
+        <h3 class="py-3 heading-section">Cart</h3>
+        <div class="mx-auto heading-line"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-1">
+                <table class="table">
+                    <thead>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Toppings</th>
+                        <th>Sub total</th>
+                    </thead>
+                    <tbody>
+                        {% if products %}
+                        {% for item in products %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.toppings }}</td>
+                            <td>$ {{ item.total }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">Total</td>
+                            <td>$ {{ total }}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

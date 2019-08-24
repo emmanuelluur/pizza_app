@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import ProductOrder, ToppingOrder, Order
-# Register your models here.
+from .models import Product_to_order, Order
 
-admin.site.register(ProductOrder)
-admin.site.register(ToppingOrder)
 admin.site.register(Order)
+admin.site.register(Product_to_order)

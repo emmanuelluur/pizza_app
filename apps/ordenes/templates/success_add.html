@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block navbar %} {% endblock %} 
+{% block content %}
+<section class="cart py-5 mt-5">
+    <div class="text-center py-3">
+        <h2 class="py-3 heading-section">Success</h2>
+        <div class="mx-auto heading-line"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-3">
+                <h3>
+                    Product added to cart
+                </h3>
+                <a href="{% url 'cart_view' %}" class="btn btn-primary">Go to cart</a>
+                <a href="{% url 'menu' %} " class="btn btn-primary">Go to menu</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

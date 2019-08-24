@@ -11,6 +11,7 @@
             {% if product %}
             <div class="card col-lg-4 shadow">
                 <div class="card-body">
+                    <input type="hidden" value="{{ product.name }}" id="pname">
                     <h4 class="card-title"> {{ product.name }} </h4>
                     <img src="{{ product.image_url }}" alt="item" class="img-fluid">
                     <div class="card bg-primary text-white text-center pt-3 shadow">
@@ -49,7 +50,7 @@
                         <div class="form-check ">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" data-price="{{item.price}}"
-                                    value="{{ item.price }}" name="topping_price">{{item.name}}
+                                    value="{{ item.price }}" data-name="{{item.name}}" name="topping_price">{{item.name}}
                                 <span class="badge badge-secondary">$ {{ item.price }}</span>
                             </label>
                         </div>
@@ -57,8 +58,15 @@
                         {% endfor %}
                     </div>
                     {% endif %}
-
+                    <hr>
+                    <div class="form-group">
+                        <label for="qty">
+                            Quantity
+                        </label>
+                        <input type="number" class="form-control" step="1" value="1" placeholder="0" id="qty">
+                    </div>
                 </div>
+                <span id="messages"></span>
                 <p class="text-center">
                     <button type="button" class="btn btn-primary btn-lg" id="btn-add">Add</button>
                 </p>
@@ -73,14 +81,20 @@
 {% block js %}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+
+
+        let name_prod = document.getElementById("pname").value;
         let add_btn = document.getElementById("btn-add");
         let total = 0;
-        let topping = document.querySelector(".topping-app");
+        let topping = document.querySelector(".topping-app") || null;
         let small = document.getElementById("small");
         let large = document.getElementById("large");
         let show_total = document.getElementById("total_label");
         let is_small, is_large = false
 
+        let count_topping = [];
+        let prod_price = 0;
+        let sum_price_topping = 0;
         add_btn.disabled = true;
         show_total.innerHTML = total;
 
@@ -94,6 +108,7 @@
             total += parseFloat(small.value);
             show_total.innerHTML = total.toFixed(2);
             add_btn.disabled = false;
+            prod_price = parseFloat(small.value);
         })
         large.addEventListener("change", () => {
             is_large = true
@@ -105,25 +120,70 @@
             total += parseFloat(large.value);
             show_total.innerHTML = total.toFixed(2);
             add_btn.disabled = false;
+            prod_price = parseFloat(large.value);
         })
 
-
-        topping.addEventListener("click", el => {
-            if (el.target.getAttribute("name") == 'topping_price') {
-                if (el.target.checked) {
-                    total += parseFloat(el.target.dataset.price);
-                } else {
-                    total -= parseFloat(el.target.dataset.price)
+        if (topping != null) {
+            topping.addEventListener("click", el => {
+                if (el.target.getAttribute("name") == 'topping_price') {
+                    if (el.target.checked) {
+                        sum_price_topping  += parseFloat(el.target.dataset.price);
+                        count_topping.push(el.target.dataset.name);
+                        total += parseFloat(el.target.dataset.price);
+                    } else {
+                        count_topping.splice(count_topping.length - 1, 1);
+                        
+                        total -= parseFloat(el.target.dataset.price);
+                        sum_price_topping  -= parseFloat(el.target.dataset.price);
+                    }
+                    show_total.innerHTML = total.toFixed(2);
                 }
-                show_total.innerHTML = total.toFixed(2);
-            }
-        })
+            })
+        }
+
 
         add_btn.addEventListener("click", () => {
-            console.log("press");
+            let data = new FormData();
+            let url = "{% url 'add_item_post' %}"
+
+            data.append("user", "{{ user.id }}");
+            data.append("product", "{{ product.id }}");
+            
+            data.append("price", prod_price);
+            data.append("toppings", count_topping);
+            data.append("total_toppings", sum_price_topping);
+            data.append("total", ((prod_price + sum_price_topping) * document.getElementById('qty').value));
+            data.append('quantity', document.getElementById('qty').value)
+            data.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+            post(url,data)
+            .then(resp => {
+                location.href = "{% url 'success_add' %}";
+                let respo = JSON.parse(resp);
+                document.getElementById("messages").innerHTML = `<div class='alert alert-info'>${respo.message}</div>`
+                console.log(JSON.parse(resp))
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
         })
     })
 
+    const post = (url, data) => {
+        return new Promise((resolve, reject) => {
+            let request = new XMLHttpRequest();
+            request.open('POST', url, true);
+            request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    resolve(this.responseText);
+                }
+            }
+            request.onerror = function () {
+                reject(Error("Network Error"));
+            };
+
+            request.send(data);
+        })
+    }
 </script>
 {% endblock %}
