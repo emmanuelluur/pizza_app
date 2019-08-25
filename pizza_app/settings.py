@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import environ
+
+env = environ.Env()
+
+# reading .env file
+env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5!*i31p^7-zzs5ua$o0pmla+(0(*&2we+09m*mov_@za%wn5ea'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -128,5 +134,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR), 'static')
 
 # STRIPE KEYS
-STRIPE_SECRET_KEY = '<stripe key>'
-STRIPE_PUBLISHABLE_KEY = '<stripe key>'
+STRIPE_SECRET_KEY = env('SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = env('PUBLISHABLE_KEY')
