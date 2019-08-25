@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from apps.ordenes.models import Order
 from django.db.models import Sum
 
@@ -25,22 +25,21 @@ def payment_view(request, id_order):
             "user": user,
             "key": settings.STRIPE_PUBLISHABLE_KEY,
         }
+        if request.method == "POST":
+            id_order = request.POST['order_id']
+            update = Order.objects.filter(id=id_order)
+            amount = int(float(request.POST['mount']) * 100)
+            name = request.POST['nameU']
+            # set complete order
+            update.update(is_complete=True)
+            charge = stripe.Charge.create(
+                amount=amount,
+                currency='usd',
+                description=f"Order {id_order} charge customer {name}",
+                source=request.POST['stripeToken']
+            )
+            return render(request, template, {'message': 'Thanks for Purchase'})
         return render(request, template, context)
+
     except:
         return redirect('order_view')
-
-    if request.method == "POST":
-        id_order = request.POST['order_id']
-        update = Order.objects.filter(id=id_order)
-        amount = int(float(request.POST['mount']) * 100)
-        name = request.POST['nameU']
-        charge = stripe.Charge.create(
-            amount=amount,
-            currency='usd',
-            description=f"Order {id_order} charge customer {name}",
-            source=request.POST['stripeToken']
-        )
-        # set complete order
-        update.update(is_complete=True)
-        return render(request, template, {'message': 'Thanks for Purchase'})
-    
