@@ -22,26 +22,28 @@
   {% block navbar %}
   <nav class="navbar navbar-expand-lg fixed-top navigation-nav">
     <div class="container nav-content">
-        {% if user.is_authenticated %}
-        <!-- user login -->
-        <a class="navbar-brand" href="#">{{ user.username }} </a>
-        {% else %}
-        <a class="navbar-brand" href="#">Pinocchio's</a>
-        {% endif %}
+      {% if user.is_authenticated %}
+      <!-- user login -->
+      <a class="navbar-brand" href="#">{{ user.username }} </a>
+      {% else %}
+      <a class="navbar-brand" href="#">Pinocchio's</a>
+      {% endif %}
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"> <i class="fas fa-bars"></i> </span>
       </button>
       <div class="collapse navbar-collapse justify-content-end " id="navbarNavDropdown">
         <article class="navbar-nav">
-          <a href="#" class="nav-item nav-link">Home</a>
+          <a href="{% url 'homepage' %}" class="nav-item nav-link">Home</a>
           <a href="{% url 'menu' %}" class="nav-item nav-link">Menu</a>
-          <a href="{% url 'order_view' %}" class="nav-item nav-link">Orders</a>
           {% if user.is_authenticated %}
+          <a href="{% url 'order_view' %}" class="nav-item nav-link">Orders</a>
           <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
-          {% endif %}
           <a href="{% url 'cart_view' %}" class="nav-item nav-link cart-item"><i class="fas fa-shopping-cart"></i></a>
-          
+          {% else %}
+          <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+          {% endif %}
 
         </article>
       </div>

@@ -34,6 +34,6 @@ def login_user(request):
 
 def logout_view(request):
     logout(request)
-    
-    return  redirect('login_auth')
     # Redirect to a success page.
+    return  redirect('homepage')
+    

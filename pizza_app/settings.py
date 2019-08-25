@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.homepage',
     'apps.pagos',
     'apps.ordenes',
     'apps.categorias',

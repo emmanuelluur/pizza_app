@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="home" class="header mt-5 py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text-left my-auto">
+                <h1>Pinocchio's Pizza & Subs</h1>
+                <p>
+                    74 Winthrop Street
+                    Harvard Square
+                </p>
+                <p class="info">
+                    <i class="fas fa-phone"></i> &nbsp; &nbsp; 617-876-4897 <br>
+                    <i class="fas fa-envelope-open-text"></i> &nbsp; &nbsp; pinocchiospizza1@gmail.com
+                </p>
+                <!--social-->
+                <p class="text-muted">
+                    Find us on
+                </p>
+                <article class="nav social">
+                    <a href="#" class="nav-item nav-link "><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="nav-item nav-link"> <i class="fab fa-instagram"></i> </a>
+                </article>
+            </div>
+            <div class="col-lg-6    text-center">
+                <img src="{% static './images/header_1.jpg' %}" alt="pizza" class="img-fluid rounded shadow-lg ">
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--Call to action-->
+<section id="action-call" class="call-to-action mt-5 py-5">
+    <div class="text-center py-3">
+        <h1 class="py-3"> Register in our website </h1>
+        <div class="mx-auto heading-line"></div>
+    </div>
+
+    <div class="container-fluid text-center">
+        <p>
+            You can order your pizzas online and much more!
+        </p>
+        <a href="{% url 'signin' %}" class="btn btn-primary btn-lg">Learn more</a>
+    </div>
+</section>
+<!--About us-->
+<section id="about-us" class="about-us mt-5 py-5 bg-light">
+    <div class="text-center py-3">
+        <h1 class="py-3"> About us </h1>
+        <div class="mx-auto heading-line"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-lg-3 my-auto mt-auto">
+                <p>
+                    Noch's has reached a landmark this year......50 years in business! We've been feeding Harvard and
+                    the surrounding area since 1966!
+                </p>
+                <p>
+                    We sell award-winning sicilian-style pizza and mouth-watering steak subs! We have over 500 reviews
+                    on Yelp--- check it out!
+                </p>
+                <p>
+                    Pinocchio's was recently named 1st Runner-up in the 'Boston's Best Pizza Poll' conducted by
+                    Eater.com and Top College Pizza Shop by Thrillist.com.
+                </p>
+
+            </div>
+            <div class="col-lg-9">
+                <section class="row">
+                    <div class="col-lg-6">
+                        <h6>Check out our mention on Suits!</h6>
+                        <iframe class="video" src="https://www.youtube.com/embed/hoM7PJu6V-E" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6>....and on the Phantom Gourmet</h6>
+                        <iframe class="video" src="https://www.youtube.com/embed/TkABR72j7jU" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Find-->
+<section id="find" class="find-us mt-5 mb-5 py-5">
+    <div class="text-center py-3">
+        <h1 class="py-3"> Locations </h1>
+        <div class="mx-auto heading-line"></div>
+    </div>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-6">
+                <img src="{% static './images/map.gif' %}" alt="map-fake" class="img-fluid shadow-lg">
+            </div>
+            <div class="col-lg-6 text-left my-auto">
+                <h4>Pinocchio's Pizza & Subs</h4>
+                <ul class="list-unstyled">
+                    <li>
+                        Pinocchio's is located on Winthrop street right near the corner of JFK Street next to Berk's
+                        shoes.
+                    </li>
+                    <li>
+                        We are 2 blocks from the Harvard Square T stop.
+                    </li>
+                    <li>
+                        Do not park across the street from us! It is a tow zone!
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
